@@ -21,11 +21,39 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
-  justify-content: space-between;
+  color: rgb(4, 173, 57);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
-.linkstag {
+Nav {
+  text-align: center;
+  text-decoration: none;
   margin: 5px;
+}
+Nav a {
+  text-align: center;
+  text-decoration: none;
+  margin: 5px;
+  color: white;
+  text-transform: uppercase;
+}
+nav a:hover {
+  color: blue;
+  font-size: larger;
+}
+
+nav a:active {
+  color: black;
+}
+p {
+  font-style: bolder;
+  text-align: center;
+  margin: 5px 50px 0px 50px;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(4, 173, 57);
+}
+span {
+  color: white;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .App-link {
   color: #61dafb;
