@@ -1,13 +1,13 @@
-import { blogPosts } from "../utils/sampleBlogs";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-const AllBlogs = () => {
+const AllBlogs = ({ blogs }) => {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const sortOrder = searchParams.get("sortOrder");
   const sortField = searchParams.get("sortField");
   const limit = Number(searchParams.get("limit"))
     ? Number(searchParams.get("limit"))
-    : blogPosts.length;
+    : blogs.length;
   const page = Number(searchParams.get("page"));
 
   const sortblogs = (a, b) => {
@@ -28,13 +28,16 @@ const AllBlogs = () => {
   };
 
   const filterBlogs = (blog, index) => {
-    if (index > page - 1 && index < page + limit) return true;
+    if (index >= page * limit && index < limit * (page + 1)) return true;
     return false;
   };
 
   return (
     <div>
-      {blogPosts
+      <button onClick={() => navigate("/blogs/submit-blog")}>
+        Create New Post
+      </button>
+      {blogs
         .filter((blog, index) => filterBlogs(blog, index))
         .sort((a, b) => sortblogs(a, b))
         .map((blog) => {
@@ -47,21 +50,12 @@ const AllBlogs = () => {
 const Blog = ({ blog }) => {
   return (
     <div>
-      <p>
-        Title: <span>{blog.title}</span>
-      </p>
-      <p>
-        Text: <span>{blog.text}</span>
-      </p>
-      <p>
-        Author: <span>{blog.author}</span>
-      </p>
-      <p>
-        Created At: <span>{blog.createdAt}</span>
-      </p>
-      <p>
-        ID:<span> {blog.id}</span>
-      </p>
+      <p>Title: {blog.title}</p>
+      <p>Text: {blog.text}</p>
+      <p>Author: {blog.author}</p>
+      <p>Created At: {blog.createdAt}</p>
+      <p>ID: {blog.id}</p>
+      <hr />
     </div>
   );
 };
